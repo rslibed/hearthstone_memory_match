@@ -1,0 +1,86 @@
+/* Basic */
+body {
+    background: url('images/main-background.png');
+    color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*background-position: 0 -90px;*/
+    width: 100vmin;
+    height: 100vmin;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.8s;
+    margin: 10px;
+}
+a:hover {
+    text-decoration: none;
+    color: orange;
+}
+.link-container {
+    position: absolute;
+    top: 65px;
+    right: 50px;
+}
+/* Header */
+#logo {
+    background: url('images/logo.jpg');
+    position: relative;
+    left: 20px;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+}
+#logo, header h1 {
+    display: inline-block;
+}
+header h1 {
+    float: right;
+    position: relative;
+    top: 35px;
+    margin-right: 35px;
+}
+/* Cards */
+.card {
+    border: none;
+    background: transparent;
+}
+img {
+    border-radius: 10px;
+    transition: 0.8s;
+}
+img:hover {
+    box-shadow: 5px 5px 5px orange,
+                -5px -5px 5px orange;
+    cursor: pointer;
+}
+.hero {
+    width: 155px;
+    display:none;
+}
+.legend {
+    width: 70%;
+}
+.row {
+    margin-bottom: 10px;
+}
+#game-area {
+    position: absolute;
+    left: 10px;
+    top: 175px;
+}
+/* Stats Container */
+#stats-container {
+    position: absolute;
+    left: 40px;
+    top: 22%;
+    padding: 10px 5px;
+    background-color: #222;
+    width: 20%;
+    line-height: 40px;
+    border-radius: 5px;
+    opacity: 0.9;
+}
