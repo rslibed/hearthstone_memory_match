@@ -9,186 +9,223 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>
+    <!--<script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"></script>-->
+    <script src="app.js"></script>
     <title>Heroes of MatchCraft - Memory Match Game</title>
 </head>
 <body>
     <header>
-        <div id="logo"></div>
-        <h1 id="title">Hearthstone: Heroes of Matchcraft</h1>
+        <span class="title"><img src="images/logo.jpg">Matchstone: Heroes of Matchcraft</span>
         <div class="link-container">
             <a href="#">Settings</a>
-            <a href="#">About</a>
+            <a href="about.html">About</a>
         </div>
     </header>
+    <div class="main-contents">
     <div id="stats-container">
-        <section class="games-played">
-            <div class="label">Games Played</div>
-            <div class="value"></div>
-        </section>
-        <section class="attempts">
-            <div class="label">Attempts</div>
-            <div class="value"></div>
-        </section>
-        <section class="accuracy">
-            <div class="label">Accuracy</div>
-            <div class="value"></div>
-        </section>
-        <button class="reset btn btn-sm btn-primary">Reset Game</button>
+        <div id="stats">
+            <section class="games-played">
+                <div class="label">Games Played</div>
+                <div class="value"></div>
+            </section>
+            <section class="attempts">
+                <div class="label">Attempts</div>
+                <div class="value"></div>
+            </section>
+            <section class="accuracy">
+                <div class="label">Accuracy</div>
+                <div class="value"></div>
+            </section>
+            <section class="game-info">
+                <p>
+                    Insert game info here.
+                </p>
+            </section>
+            <button class="reset">Reset Game</button>
+        </div>
     </div>
-    <div id="game-area" class="container offset-3">
-        <div class="row">
-            <div class="card col-2">
+    <div id="game-area">
+        <div class="card-container">
+            <div class="card">
                 <div class="front">
-                    <img class="hero" src="images/hero01.jpg" alt="">
+                    <img class="hero" src="images/hero01.png" alt="">
                 </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero01.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero02.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero02.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero03.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero03.jpg" alt="">
-                </div>
-                <div class="back m-auto">
+                <div class="back">
                     <img class="legend" src="images/card-back-legend.jpg" alt="">
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="card col-2">
+        <div class="card-container">
+            <div class="card">
                 <div class="front">
-                    <img class="hero" src="images/hero04.jpg" alt="">
+                    <img class="hero" src="images/hero01.png" alt="">
                 </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero04.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero05.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero05.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero06.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero06.jpg" alt="">
-                </div>
-                <div class="back m-auto">
+                <div class="back">
                     <img class="legend" src="images/card-back-legend.jpg" alt="">
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="card col-2">
+        <div class="card-container">
+            <div class="card">
                 <div class="front">
-                    <img class="hero" src="images/hero07.jpg" alt="">
+                    <img class="hero" src="images/hero02.png" alt="">
                 </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero07.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero08.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero08.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero09.jpg" alt="">
-                </div>
-                <div class="back m-auto">
-                    <img class="legend" src="images/card-back-legend.jpg" alt="">
-                </div>
-            </div>
-            <div class="card col-2">
-                <div class="front">
-                    <img class="hero" src="images/hero09.jpg" alt="">
-                </div>
-                <div class="back m-auto">
+                <div class="back">
                     <img class="legend" src="images/card-back-legend.jpg" alt="">
                 </div>
             </div>
         </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero02.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
         </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero03.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero03.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero04.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero04.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero05.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero05.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero06.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero06.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero07.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero07.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero08.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero08.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero09.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="front">
+                    <img class="hero" src="images/hero09.png" alt="">
+                </div>
+                <div class="back">
+                    <img class="legend" src="images/card-back-legend.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
 </html>
