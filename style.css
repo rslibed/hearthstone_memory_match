@@ -36,15 +36,19 @@ header {
 }
 .link-container {
     position: absolute;
+    width: 35%;
     top: 5%;
     right: 2%;
     display: inline-block;
+    text-align: right;
 }
 .link-container a {
     color: #FFB800;
     -webkit-text-stroke: 1px #CE6529;
     font-size: 1.8em;
     letter-spacing: 2px;
+    margin-right: 2%;
+
 }
 .link-container a:hover {
     text-decoration: none;
