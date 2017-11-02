@@ -4,18 +4,15 @@ var second_card_clicked = null;
 var total_possible_matches = 9;
 var match_counter = 0;
 var preventClick = true;
-<<<<<<< HEAD
 var matches = 0;
 var attempts = 0;
 var accuracy = 0;
 var games_played = 0;
 
-=======
 var audio;
 var backgroundAudio = new Audio('sounds/background-music.ogg');
 backgroundAudio.loop = true;
 backgroundAudio.play();
->>>>>>> 2d8a4d6bb7a53be0abd19922343928433c53cd7c
 function initializeApp () {
     function createCardElements () {
         var cardArray = [];
@@ -34,9 +31,10 @@ function initializeApp () {
                 cardArray.push(cardContainer);
             }
         }
-        console.log(createCardElements);
+        return cardArray;
     }
-    randomizeCards();
+    console.log(createCardElements());
+
     $(".card").click(card_clicked);
     function card_clicked () {
         if (preventClick) {
