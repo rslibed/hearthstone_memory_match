@@ -126,6 +126,7 @@ header {
     margin: 0 auto;
     top: 8%;
     background: transparent;
+    border: none;
 }
 .front, .back {
     position: absolute;
