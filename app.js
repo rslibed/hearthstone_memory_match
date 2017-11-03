@@ -143,7 +143,7 @@ function initializeApp () {
                 }, 1000);
             }
             if (attempts > 0) {
-                accuracy = (parseFloat(match_counter / attempts) * 100) + "%";
+                accuracy = (parseFloat(match_counter / attempts) * 100).toFixed(2) + "%";
                 $(".accuracy .value").text(accuracy);
             }
         } else {
