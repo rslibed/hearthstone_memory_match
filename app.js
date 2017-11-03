@@ -25,36 +25,54 @@ function initializeApp () {
                 var frontImage = $("<img>").addClass("hero").attr("src", "images/hero0" + i + ".png");
                 front.append(frontImage);
                 var back = $("<div>").addClass("back");
-                var backImage = $("<img>").addClass("legend").attr("src", "images/card-back-legend.jpg");
+                var backImage = $("<img>").addClass("legend").attr({
+                    "src": "images/card-back-legend.jpg",
+                    "draggable": "false"
+            });
                 back.append(backImage);
                 card.append(front, back);
                 cardArray.push(cardContainer);
             }
         }
-        return cardArray;
+        function shuffle(array) {
+            var remaining = array.length, temp, i;
+            while (remaining) {
+                i = Math.floor(Math.random() * remaining--);
+                temp = array[remaining];
+                array[remaining] = array[i];
+                array[i] = temp;
+            }
+
+            for (var i = 0; i < array.length; i++) {
+                $("#game-area").append(array[i]);
+            }
+        }
+        shuffle(cardArray);
     }
-    console.log(createCardElements());
+    createCardElements();
 
     $(".card").click(card_clicked);
     function card_clicked () {
+        if ($(this).find(".front").attr("matched")) {
+            return;
+        }
         if (preventClick) {
             preventClick = false;
-
             if (first_card_clicked === null) {
                 first_card_clicked = this;
-                $(first_card_clicked).find(".back").hide();
+                $(first_card_clicked).find(".back").addClass("spinner");
                 preventClick = true;
-                if (preventClick) {
-                    $(this).stopPropagation();
-                }
             } else {
                 second_card_clicked = this;
-                $(second_card_clicked).find(".back").hide();
+                $(second_card_clicked).find(".back").addClass("spinner");
                 attempts++;
                 console.log("Attempts: " + attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {
+                    $(first_card_clicked).find(".front").attr("matched", "true");
+                    $(second_card_clicked).find(".front").attr("matched", "true");
                     match_counter++;
                     matches++;
+
                     console.log("Matches: " + matches);
                     preventClick = true;
                     if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero01.png') {
