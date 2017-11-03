@@ -60,11 +60,11 @@ function initializeApp () {
             preventClick = false;
             if (first_card_clicked === null) {
                 first_card_clicked = this;
-                $(first_card_clicked).find(".back").addClass("spinner");
+                $(first_card_clicked).find(".back").hide();
                 preventClick = true;
             } else {
                 second_card_clicked = this;
-                $(second_card_clicked).find(".back").addClass("spinner");
+                $(second_card_clicked).find(".back").hide();
                 attempts++;
                 console.log("Attempts: " + attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {

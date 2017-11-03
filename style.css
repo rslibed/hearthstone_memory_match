@@ -194,13 +194,13 @@ h3 {
 p {
     font-size: 1.3em;
 }
-.spinner{
-    animation: spin 2s 1 linear;
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotateY(0); }
-    to   { -webkit-transform: rotateY(180deg); }
-}
-.flipped {
-    display: none;
-}
+/*.spinner{*/
+    /*animation: spin 2s 1 linear;*/
+/*}*/
+/*@-webkit-keyframes spin {*/
+    /*from { -webkit-transform: rotateY(0); }*/
+    /*to   { -webkit-transform: rotateY(180deg); }*/
+/*}*/
+/*.flipped {*/
+    /*display: none;*/
+/*}*/
