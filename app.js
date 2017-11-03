@@ -4,15 +4,21 @@ var second_card_clicked = null;
 var total_possible_matches = 9;
 var match_counter = 0;
 var preventClick = true;
-var matches = 0;
 var attempts = 0;
 var accuracy = 0;
 var games_played = 0;
-
 var audio;
-var backgroundAudio = new Audio('sounds/background-music.ogg');
-backgroundAudio.loop = true;
-backgroundAudio.play();
+function background () {
+    var backgroundMusic = ['background-music', 'background-music2', 'background-music3', 'background-music4'];
+    var randomSong = Math.floor(Math.random() * backgroundMusic.length);
+    var backgroundAudio = new Audio('sounds/' + backgroundMusic[randomSong] + '.ogg');
+    backgroundAudio.loop = true;
+    backgroundAudio.play();
+}
+background();
+var victory2;
+var victory3;
+var victory4;
 function initializeApp () {
     function createCardElements () {
         var cardArray = [];
@@ -50,13 +56,18 @@ function initializeApp () {
         shuffle(cardArray);
     }
     createCardElements();
-
-    $(".card").click(card_clicked);
+    $(".card").click(card_clicked).mouseenter(card_hover);
+    $(".reset").click(resetGame);
+    function card_hover () {
+        console.log($(this).find(".front").find("img").attr("src"));
+    }
     function card_clicked () {
         if ($(this).find(".front").attr("matched")) {
             return;
         }
         if (preventClick) {
+            var cardFlipSound = new Audio("sounds/card-flip.ogg");
+            cardFlipSound.play();
             preventClick = false;
             if (first_card_clicked === null) {
                 first_card_clicked = this;
@@ -66,14 +77,12 @@ function initializeApp () {
                 second_card_clicked = this;
                 $(second_card_clicked).find(".back").hide();
                 attempts++;
-                console.log("Attempts: " + attempts);
+                $(".attempts .value").text(attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {
                     $(first_card_clicked).find(".front").attr("matched", "true");
                     $(second_card_clicked).find(".front").attr("matched", "true");
                     match_counter++;
-                    matches++;
-
-                    console.log("Matches: " + matches);
+                    console.log(match_counter);
                     preventClick = true;
                     if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero01.png') {
                         audio = new Audio('sounds/priest.ogg');
@@ -104,25 +113,62 @@ function initializeApp () {
                         audio.play();
                     }
                     if (match_counter === total_possible_matches) {
-                        $("#stats-container .game-info p").text("You win!");
+                        function winnerDelay () {
+                            $("#game-area").find(".card-container").fadeOut();
+                            var winDiv = $("<div>").text("YOU WIN!").addClass("winner");
+                            $("#game-area").append(winDiv);
+                            victory2 = new Audio('sounds/victory2.ogg');
+                            victory3 = new Audio('sounds/victory3.ogg');
+                            victory4 = new Audio('sounds/victory4.ogg');
+                            victory2.play();
+                            victory3.play();
+                            victory4.play();
+                        }
+                        setTimeout(winnerDelay, 900);
                     }
                     first_card_clicked = null;
                     second_card_clicked = null;
                 } else {
-                    hideIn2Seconds();
+                    hideIn1Seconds();
                 }
             }
 
-            function hideIn2Seconds() {
+            function hideIn1Seconds() {
                 setTimeout(function () {
                     $(first_card_clicked).find(".back").show();
                     $(second_card_clicked).find(".back").show();
                     preventClick = true;
                     first_card_clicked = null;
                     second_card_clicked = null;
-                }, 2000);
+                }, 1000);
             }
+            if (attempts > 0) {
+                accuracy = (parseFloat(match_counter / attempts) * 100) + "%";
+                $(".accuracy .value").text(accuracy);
+            }
+        } else {
+            var error = new Audio("sounds/error.ogg");
+            error.play();
         }
 
+    }
+    function resetGame () {
+        $("#game-area").find(".card-container").remove();
+        first_card_clicked = null;
+        second_card_clicked = null;
+        preventClick = true;
+        attempts = 0;
+        match_counter = 0;
+        accuracy = 0;
+        console.log(match_counter);
+        accuracy = 0;
+        games_played++;
+        $(".attempts .value").text(attempts);
+        $(".accuracy .value").text(accuracy);
+        $(".attempts .value").text(attempts);
+        $(".games-played .value").text(games_played);
+        createCardElements();
+        $(".card").click(card_clicked).mouseenter(card_hover);
+        $("#game-area .winner").fadeOut();
     }
 };
