@@ -6,6 +6,10 @@
 * {
     box-sizing: border-box;
     font-family: 'LifeCraft';
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 body {
     background: url('images/main-background.png');
@@ -138,7 +142,7 @@ header {
 }
 .back img {
     width: 100%;
-    border-radius: 2%;
+    border-radius: 6%;
     transition: 0.8s;
 }
 .back:hover img {
@@ -215,3 +219,8 @@ p {
 /*.flipped {*/
     /*display: none;*/
 /*}*/
+
+.fa {
+    color: #FFF;
+    font-size: 20px;
+}
