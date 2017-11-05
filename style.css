@@ -83,20 +83,21 @@ header {
     left: 18%;
 }
 .reset {
-    position: relative;
-    font-size: 1.2em;
-    left: 50px;
+    font-size: 4vmin;
     border-radius: 3%;
     outline: none;
-    border: none;
-    background-color: #222;
-    border: 1px solid #FFB800;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
     padding: 5px;
+    background-color: rgba(159,22,0,.6);
+    border-color: #ea3012;
+    box-shadow: 0 0 0 1px #000;
+    color: #f8b700;
+    -webkit-text-stroke: 1px #CE6529;
+    position: absolute;
+    left: 10px;
+    top: 15vh;
     transition: 0.8s;
 }
-.reset:hover {
+.hoverEffect:hover {
     box-shadow: 5px 5px 5px #FFB800,
     -5px -5px 5px #FFB800,
     -5px 5px 5px #FFB800,
@@ -137,20 +138,18 @@ header {
     top: 0;
     left: 0;
 }
+.back {
+    transition: 0.6s;
+}
+.hidden {
+    display: none;
+}
 .front img {
     width: 100%;
 }
 .back img {
     width: 100%;
     border-radius: 6%;
-    transition: 0.8s;
-}
-.back:hover img {
-    box-shadow: 5px 5px 5px #FFB800,
-    -5px -5px 5px #FFB800,
-    -5px 5px 5px #FFB800,
-    5px -5px 5px #FFB800;
-    cursor: pointer;
 }
 /* Winner */
 .winner {
@@ -219,7 +218,42 @@ p {
 /*.flipped {*/
     /*display: none;*/
 /*}*/
+/* Settings */
+.modal-dialog {
+    opacity: 0.9;
+}
+.modal-header, .modal-body {
+    background-color: #222;
+}
+.modal-header, .modal-content {
+    border: none;
+}
+.modal-content {
+    color: #fff;
+}
+.modal-title {
+    font-size: 4vmin;
+}
+.modal-body span {
+    font-size: 3vmin;
+}
+.modal-title, .modal-body span {
+    color: #FFB800;
+    -webkit-text-stroke: 1px #CE6529;
+}
 
+.sound {
+    position: relative;
+    left: 10px;
+    top: 2px;
+}
+.close span {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+.close span:hover {
+    cursor: pointer;
+}
 .fa {
     color: #FFF;
     font-size: 20px;

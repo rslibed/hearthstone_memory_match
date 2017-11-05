@@ -10,7 +10,7 @@ var games_played = 0;
 var audio;
 var backgroundMusic = ['background-music', 'background-music2', 'background-music3', 'background-music4'];
 var randomSong = Math.floor(Math.random() * backgroundMusic.length);
-var backgroundAudio = new Audio('sounds/' + backgroundMusic[randomSong] + '.ogg');
+var backgroundAudio = new Audio ('sounds/' + backgroundMusic[randomSong] + '.ogg');
 backgroundAudio.loop = true;
 backgroundAudio.play();
 var backgroundAudioPlaying = true;
@@ -18,16 +18,6 @@ var victory2;
 var victory3;
 var victory4;
 function initializeApp () {
-    $(".sound").click(toggleSound);
-    function toggleSound () {
-        if (backgroundAudioPlaying) {
-            backgroundAudio.pause();
-            backgroundAudioPlaying = false;
-        } else {
-            backgroundAudio.play();
-            backgroundAudioPlaying = true;
-        }
-    }
     function createCardElements () {
         var cardArray = [];
         for (var i = 1; i < 10; i++) {
@@ -41,7 +31,7 @@ function initializeApp () {
                     "draggable": "false"
                 });
                 front.append(frontImage);
-                var back = $("<div>").addClass("back");
+                var back = $("<div>").addClass("back").addClass("hoverEffect").addClass("hidden");
                 var backImage = $("<img>").addClass("legend").attr({
                     "src": "images/card-back-legend.jpg",
                     "draggable": "false"
@@ -66,12 +56,82 @@ function initializeApp () {
         }
         shuffle(cardArray);
     }
+    function createModal () {
+        var modalDiv = $("<div>").addClass("modal fade").attr({
+            id: "settingsModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "settingsModalLabel",
+            "aria-hidden": "true"
+        });
+        var modalDialog = $("<div>").addClass("modal-dialog").attr("role", "document");
+        var modalContent = $("<div>").addClass("modal-content");
+        var modalHeader = $("<div>").addClass("modal-header");
+        var modalTitle = $("<h5>").addClass("modal-title").attr("id", "settingsModalLabel").text("Settings");
+        var modalButton = $("<button>").addClass("close").attr({
+           type: "button",
+           "data-dismiss": "modal",
+           "aria-label": "Close"
+        });
+        var closeButton = $("<span>").attr("aria-hidden", "true").text("x");
+        var modalBody = $("<div>").addClass("modal-body");
+        var optionContainer = $("<div>").addClass("optionContainer");
+        var volumeOption = $("<div>").addClass("option");
+        var volumeTitle = $("<span>").text("Toggle music:");
+        var volume = $("<i>").addClass("fa fa-volume-up sound").attr("aria-hidden", "true");
+        var animationOption = $("<div>").addClass("option");
+        var animationTitle = $("<span>").text("Toggle animations:");
+        var animation = $("<input>").addClass("animation").attr({
+            "type": "checkbox",
+            name: "animation",
+            "checked": "true"
+        });
+        modalDiv.append(modalDialog);
+        modalDialog.append(modalContent);
+        modalContent.append(modalHeader);
+        modalHeader.append(modalTitle);
+        modalHeader.append(modalButton);
+        modalButton.append(closeButton);
+        modalContent.append(modalBody);
+        modalBody.append(optionContainer);
+        volumeOption.append(volumeTitle);
+        volumeOption.append(volume);
+        animationOption.append(animationTitle);
+        animationOption.append(animation);
+        optionContainer.append(volumeOption);
+        optionContainer.append(animationOption);
+        $("#game-area").after(modalDiv);
+    }
     createCardElements();
+    createModal();
+    $(".sound").click(toggleSound);
+    function toggleSound () {
+        if (backgroundAudioPlaying) {
+            backgroundAudio.pause();
+            backgroundAudioPlaying = false;
+            $(".sound").removeClass("fa-volume-up").addClass("fa-volume-off");
+        } else {
+            backgroundAudio.play();
+            backgroundAudioPlaying = true;
+            $(".sound").removeClass("fa-volume-off").addClass("fa-volume-up");
+        }
+    }
+    $(".animation").click(function() {
+        if ($(".animation").val() === "on") {
+            $(".animation").val("off");
+            $(".back").removeClass("hoverEffect");
+            $(".reset").removeClass("hoverEffect");
+        } else {
+            $(".animation").val("on");
+            $(".back").addClass("hoverEffect");
+            $(".reset").addClass("hoverEffect");
+        }
+    });
+    setTimeout(function() {
+        $(".back").removeClass("hidden");
+    }, 1000);
     $(".card").click(card_clicked);
     $(".reset").click(resetGame);
-    function card_hover () {
-        console.log($(this).find(".front").find("img").attr("src"));
-    }
     function card_clicked () {
         if($(this).find(".front").attr("clicked")) {
             return;
@@ -82,12 +142,12 @@ function initializeApp () {
             preventClick = false;
             if (first_card_clicked === null) {
                 first_card_clicked = this;
-                $(first_card_clicked).find(".back").hide();
+                $(first_card_clicked).find(".back").addClass("hidden");
                 $(first_card_clicked).find(".front").attr("clicked", "true");
                 preventClick = true;
             } else {
                 second_card_clicked = this;
-                $(second_card_clicked).find(".back").hide();
+                $(second_card_clicked).find(".back").addClass("hidden");
                 attempts++;
                 $(".attempts .value").text(attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {
@@ -143,11 +203,10 @@ function initializeApp () {
                     hideIn1Seconds();
                 }
             }
-
             function hideIn1Seconds() {
                 setTimeout(function () {
-                    $(first_card_clicked).find(".back").show();
-                    $(second_card_clicked).find(".back").show();
+                    $(first_card_clicked).find(".back").removeClass("hidden");
+                    $(second_card_clicked).find(".back").removeClass("hidden");
                     preventClick = true;
                     $(first_card_clicked).find(".front").removeAttr("clicked");
                     first_card_clicked = null;
@@ -179,7 +238,10 @@ function initializeApp () {
         $(".attempts .value").text(attempts);
         $(".games-played .value").text(games_played);
         createCardElements();
-        $(".card").click(card_clicked).mouseenter(card_hover);
+        setTimeout(function() {
+            $(".back").removeClass("hidden");
+        }, 1000);
+        $(".card").click(card_clicked);
         $("#game-area .winner").fadeOut();
         var reset = new Audio("sounds/reset.ogg");
         reset.play();
