@@ -31,7 +31,7 @@ function initializeApp() {
                     "draggable": "false"
                 });
                 front.append(frontImage);
-                var back = $("<div>").addClass("back").addClass("hoverEffect").addClass("hidden");
+                var back = $("<div>").addClass("back").addClass("hoverEffect").addClass("backface").addClass("hidden");
                 var backImage = $("<img>").addClass("legend").attr({
                     "src": "images/card-back-legend.jpg",
                     "draggable": "false"
@@ -122,7 +122,7 @@ function initializeApp() {
         var winAccuracy = $("<div>").addClass("win-accuracy");
         var winAccuracyLabel = $("<h5>").text("Accuracy");
         var winAccuracyValue = $("<div>").addClass("win-accuracy-value");
-        var playAgain = $("<button>").addClass("play-reset").attr({
+        var playAgain = $("<button>").addClass("play-reset").addClass("hoverEffect").attr({
                 type: "button",
                 "data-dismiss": "modal",
                 "aria-label": "Close"
@@ -165,19 +165,18 @@ function initializeApp() {
             preventClick = false;
             if (first_card_clicked === null) {
                 first_card_clicked = this;
-                $(first_card_clicked).find(".back").addClass("hidden");
-                $(first_card_clicked).find(".back").addClass("hidden;")
+                $(first_card_clicked).addClass("flip");
                 $(first_card_clicked).find(".front").attr("clicked", "true");
                 preventClick = true;
             } else {
                 second_card_clicked = this;
-                $(second_card_clicked).find(".back").addClass("hidden");
+                $(second_card_clicked).addClass("flip");
                 attempts++;
                 $(".attempts .value").text(attempts);
                 $(".win-attempts-value").text(attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {
                     match_counter++;
-                    preventClick = true;
+                    preventClick = false;
                     if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero01.png') {
                         audio = new Audio('sounds/priest.ogg');
                         audio.play();
@@ -220,10 +219,15 @@ function initializeApp() {
 
                         setTimeout(winnerDelay, 1500);
                     }
-                    $(first_card_clicked).fadeOut("slow");
-                    $(second_card_clicked).fadeOut("slow");
-                    first_card_clicked = null;
-                    second_card_clicked = null;
+                    setTimeout(function cardsMatched () {
+                        $(first_card_clicked).find(".back").hide();
+                        $(second_card_clicked).find(".back").hide();
+                        $(first_card_clicked).find(".front").fadeOut("slow");
+                        $(second_card_clicked).find(".front").fadeOut("slow");
+                        preventClick = true;
+                        first_card_clicked = null;
+                        second_card_clicked = null;
+                    }, 1000);
                 } else {
                     hideIn1Seconds();
                 }
@@ -231,8 +235,10 @@ function initializeApp() {
 
             function hideIn1Seconds() {
                 setTimeout(function () {
-                    $(first_card_clicked).find(".back").removeClass("hidden");
-                    $(second_card_clicked).find(".back").removeClass("hidden");
+                    // $(first_card_clicked).find(".back").removeClass("hidden");
+                    // $(second_card_clicked).find(".back").removeClass("hidden");
+                    $(first_card_clicked).removeClass("flip");
+                    $(second_card_clicked).removeClass("flip");
                     preventClick = true;
                     $(first_card_clicked).find(".front").removeAttr("clicked");
                     first_card_clicked = null;
@@ -265,8 +271,11 @@ function initializeApp() {
         $(".attempts .value").text(attempts);
         $(".games-played .value").text(games_played);
         createCardElements();
+
+        $(".front").removeClass("backface");
         setTimeout(function () {
             $(".back").removeClass("hidden");
+            $(".front").addClass("backface").css("transform", "rotateY(180deg)");
         }, 1000);
         $(".card").click(card_clicked);
         $("#game-area .winner").fadeOut();
@@ -278,6 +287,7 @@ function initializeApp() {
     winModal();
     setTimeout(function () {
         $(".back").removeClass("hidden");
+        $(".front").addClass("backface").css("transform", "rotateY(180deg)");
     }, 1000);
     $(".sound").click(toggleSound);
     $(".animation").click(function () {
@@ -285,10 +295,12 @@ function initializeApp() {
             $(".animation").val("off");
             $(".back").removeClass("hoverEffect");
             $(".reset").removeClass("hoverEffect");
+            $(".play-reset").removeClass("hoverEffect");
         } else {
             $(".animation").val("on");
             $(".back").addClass("hoverEffect");
             $(".reset").addClass("hoverEffect");
+            $(".play-reset").addClass("hoverEffect");
         }
     });
     $(".card").click(card_clicked);
