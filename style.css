@@ -83,7 +83,15 @@ header {
     left: 18%;
 }
 .reset {
+    position: absolute;
+    left: 10px;
+    top: 15vh;
     font-size: 4vmin;
+}
+.play-reset {
+    font-size: 3vmin;
+}
+.play-reset, .reset {
     border-radius: 3%;
     outline: none;
     padding: 5px;
@@ -92,9 +100,6 @@ header {
     box-shadow: 0 0 0 1px #000;
     color: #f8b700;
     -webkit-text-stroke: 1px #CE6529;
-    position: absolute;
-    left: 10px;
-    top: 15vh;
     transition: 0.8s;
 }
 .hoverEffect:hover {
@@ -150,16 +155,6 @@ header {
 .back img {
     width: 100%;
     border-radius: 6%;
-}
-/* Winner */
-.winner {
-    color: #FFB800;
-    -webkit-text-stroke: 4px #CE6529;
-    font-size: 15vmin;
-    text-align: center;
-    position: absolute;
-    top: 32%;
-    left: 42%;
 }
 /* About */
 #about-container {
@@ -228,9 +223,6 @@ p {
 .modal-header, .modal-content {
     border: none;
 }
-.modal-content {
-    color: #fff;
-}
 .modal-title {
     font-size: 4vmin;
 }
@@ -241,7 +233,9 @@ p {
     color: #FFB800;
     -webkit-text-stroke: 1px #CE6529;
 }
-
+.settings-content {
+    top: 20vh;
+}
 .sound {
     position: relative;
     left: 10px;
@@ -258,3 +252,35 @@ p {
     color: #FFF;
     font-size: 20px;
 }
+/* Winner */
+.winner {
+    color: #FFB800;
+    -webkit-text-stroke: 4px #CE6529;
+    font-size: 15vmin;
+    text-align: center;
+    position: absolute;
+    top: 32%;
+    left: 42%;
+}
+#winModal, .modal-content {
+    font-size: 3vmin;
+    text-align: center;
+    color: #f8b700;
+    -webkit-text-stroke: 1px #CE6529;
+}
+.win-attempts, .win-accuracy {
+    width: 45%;
+    display: inline-block;
+}
+.win-header {
+    text-align: center;
+}
+.win-content {
+    position: relative;
+    top: 20vh;
+}
+.modal-title {
+    position: relative;
+    left: 43%;
+}
+

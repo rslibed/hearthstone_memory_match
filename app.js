@@ -10,15 +10,15 @@ var games_played = 0;
 var audio;
 var backgroundMusic = ['background-music', 'background-music2', 'background-music3', 'background-music4'];
 var randomSong = Math.floor(Math.random() * backgroundMusic.length);
-var backgroundAudio = new Audio ('sounds/' + backgroundMusic[randomSong] + '.ogg');
+var backgroundAudio = new Audio('sounds/' + backgroundMusic[randomSong] + '.ogg');
 backgroundAudio.loop = true;
 backgroundAudio.play();
 var backgroundAudioPlaying = true;
 var victory2;
 var victory3;
 var victory4;
-function initializeApp () {
-    function createCardElements () {
+function initializeApp() {
+    function createCardElements() {
         var cardArray = [];
         for (var i = 1; i < 10; i++) {
             for (var j = 0; j < 2; j++) {
@@ -35,7 +35,7 @@ function initializeApp () {
                 var backImage = $("<img>").addClass("legend").attr({
                     "src": "images/card-back-legend.jpg",
                     "draggable": "false"
-            });
+                });
                 back.append(backImage);
                 card.append(front, back);
                 cardArray.push(cardContainer);
@@ -49,14 +49,13 @@ function initializeApp () {
                 array[remaining] = array[i];
                 array[i] = temp;
             }
-
             for (var i = 0; i < array.length; i++) {
                 $("#game-area").append(array[i]);
             }
         }
         shuffle(cardArray);
     }
-    function createModal () {
+    function settingsModal() {
         var modalDiv = $("<div>").addClass("modal fade").attr({
             id: "settingsModal",
             tabindex: "-1",
@@ -65,13 +64,13 @@ function initializeApp () {
             "aria-hidden": "true"
         });
         var modalDialog = $("<div>").addClass("modal-dialog").attr("role", "document");
-        var modalContent = $("<div>").addClass("modal-content");
+        var modalContent = $("<div>").addClass("modal-content").addClass("settings-content");
         var modalHeader = $("<div>").addClass("modal-header");
         var modalTitle = $("<h5>").addClass("modal-title").attr("id", "settingsModalLabel").text("Settings");
         var modalButton = $("<button>").addClass("close").attr({
-           type: "button",
-           "data-dismiss": "modal",
-           "aria-label": "Close"
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
         });
         var closeButton = $("<span>").attr("aria-hidden", "true").text("x");
         var modalBody = $("<div>").addClass("modal-body");
@@ -102,10 +101,50 @@ function initializeApp () {
         optionContainer.append(animationOption);
         $("#game-area").after(modalDiv);
     }
-    createCardElements();
-    createModal();
-    $(".sound").click(toggleSound);
-    function toggleSound () {
+    function winModal () {
+        var winDiv = $("<div>").addClass("modal fade").attr({
+            id: "winModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "winModalLabel",
+            "aria-hidden": "true"
+        });
+        var winDialog = $("<div>").addClass("modal-dialog").attr("role", "document");
+        var winContent = $("<div>").addClass("modal-content").addClass("win-content");
+        var winHeader = $("<div>").addClass("modal-header").addClass("win-header");
+        var winTitle = $("<h5>").addClass("modal-title").attr("id", "winModalLabel").text("Winner!");
+        var winButton = $("<button>").addClass("close");
+        var winBody = $("<div>").addClass("modal-body");
+        var winningStats = $("<div>").addClass("winningStats");
+        var winAttempts = $("<div>").addClass("win-attempts");
+        var winAttemptsLabel = $("<h5>").text("Attempts");
+        var winAttemptsValue = $("<div>").addClass("win-attempts-value");
+        var winAccuracy = $("<div>").addClass("win-accuracy");
+        var winAccuracyLabel = $("<h5>").text("Accuracy");
+        var winAccuracyValue = $("<div>").addClass("win-accuracy-value");
+        var playAgain = $("<button>").addClass("play-reset").attr({
+                type: "button",
+                "data-dismiss": "modal",
+                "aria-label": "Close"
+        }).text("Play Again");
+        winDiv.append(winDialog);
+        winDialog.append(winContent);
+        winContent.append(winHeader);
+        winHeader.append(winTitle);
+        winHeader.append(winButton);
+        winContent.append(winBody);
+        winAttempts.append(winAttemptsLabel);
+        winAttempts.append(winAttemptsValue);
+        winAccuracy.append(winAccuracyLabel);
+        winAccuracy.append(winAccuracyValue);
+        winningStats.append(winAttempts);
+        winningStats.append(winAccuracy);
+        winBody.append(winningStats);
+        winBody.append(playAgain);
+        $("#game-area").after(winDiv);
+        $(".play-reset").click(resetGame);
+    }
+    function toggleSound() {
         if (backgroundAudioPlaying) {
             backgroundAudio.pause();
             backgroundAudioPlaying = false;
@@ -116,24 +155,8 @@ function initializeApp () {
             $(".sound").removeClass("fa-volume-off").addClass("fa-volume-up");
         }
     }
-    $(".animation").click(function() {
-        if ($(".animation").val() === "on") {
-            $(".animation").val("off");
-            $(".back").removeClass("hoverEffect");
-            $(".reset").removeClass("hoverEffect");
-        } else {
-            $(".animation").val("on");
-            $(".back").addClass("hoverEffect");
-            $(".reset").addClass("hoverEffect");
-        }
-    });
-    setTimeout(function() {
-        $(".back").removeClass("hidden");
-    }, 1000);
-    $(".card").click(card_clicked);
-    $(".reset").click(resetGame);
-    function card_clicked () {
-        if($(this).find(".front").attr("clicked")) {
+    function card_clicked() {
+        if ($(this).find(".front").attr("clicked")) {
             return;
         }
         if (preventClick) {
@@ -151,42 +174,42 @@ function initializeApp () {
                 $(second_card_clicked).find(".back").addClass("hidden");
                 attempts++;
                 $(".attempts .value").text(attempts);
+                $(".win-attempts-value").text(attempts);
                 if ($(first_card_clicked).find(".front").find("img").attr("src") === $(second_card_clicked).find(".front").find("img").attr("src")) {
                     match_counter++;
                     preventClick = true;
-                    if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero01.png') {
+                    if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero01.png') {
                         audio = new Audio('sounds/priest.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero02.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero02.png') {
                         audio = new Audio('sounds/warrior.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero03.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero03.png') {
                         audio = new Audio('sounds/warlock.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero04.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero04.png') {
                         audio = new Audio('sounds/mage.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero05.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero05.png') {
                         audio = new Audio('sounds/druid.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero06.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero06.png') {
                         audio = new Audio('sounds/hunter.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero07.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero07.png') {
                         audio = new Audio('sounds/shaman.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero08.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero08.png') {
                         audio = new Audio('sounds/paladin.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src")  === 'images/hero09.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero09.png') {
                         audio = new Audio('sounds/rogue.ogg');
                         audio.play();
                     }
                     if (match_counter === total_possible_matches) {
-                        function winnerDelay () {
+                        function winnerDelay() {
                             $("#game-area").find(".card-container").fadeOut();
-                            var winDiv = $("<div>").text("YOU WIN!").addClass("winner");
-                            $("#game-area").append(winDiv);
+                            $("#winModal").modal("toggle");
                             victory2 = new Audio('sounds/victory2.ogg');
                             victory3 = new Audio('sounds/victory3.ogg');
                             victory4 = new Audio('sounds/victory4.ogg');
@@ -194,6 +217,7 @@ function initializeApp () {
                             victory3.play();
                             victory4.play();
                         }
+
                         setTimeout(winnerDelay, 1500);
                     }
                     $(first_card_clicked).fadeOut("slow");
@@ -204,6 +228,7 @@ function initializeApp () {
                     hideIn1Seconds();
                 }
             }
+
             function hideIn1Seconds() {
                 setTimeout(function () {
                     $(first_card_clicked).find(".back").removeClass("hidden");
@@ -214,9 +239,11 @@ function initializeApp () {
                     second_card_clicked = null;
                 }, 1000);
             }
+
             if (attempts > 0) {
                 accuracy = (parseFloat(match_counter / attempts) * 100).toFixed(2) + "%";
                 $(".accuracy .value").text(accuracy);
+                $(".win-accuracy-value").text(accuracy);
             }
         } else {
             var error = new Audio("sounds/error.ogg");
@@ -224,7 +251,7 @@ function initializeApp () {
         }
 
     }
-    function resetGame () {
+    function resetGame() {
         $("#game-area").find(".card-container").remove();
         first_card_clicked = null;
         second_card_clicked = null;
@@ -234,12 +261,11 @@ function initializeApp () {
         accuracy = 0;
         accuracy = 0;
         games_played++;
-        $(".attempts .value").text(attempts);
         $(".accuracy .value").text(accuracy);
         $(".attempts .value").text(attempts);
         $(".games-played .value").text(games_played);
         createCardElements();
-        setTimeout(function() {
+        setTimeout(function () {
             $(".back").removeClass("hidden");
         }, 1000);
         $(".card").click(card_clicked);
@@ -247,4 +273,24 @@ function initializeApp () {
         var reset = new Audio("sounds/reset.ogg");
         reset.play();
     }
+    createCardElements();
+    settingsModal();
+    winModal();
+    setTimeout(function () {
+        $(".back").removeClass("hidden");
+    }, 1000);
+    $(".sound").click(toggleSound);
+    $(".animation").click(function () {
+        if ($(".animation").val() === "on") {
+            $(".animation").val("off");
+            $(".back").removeClass("hoverEffect");
+            $(".reset").removeClass("hoverEffect");
+        } else {
+            $(".animation").val("on");
+            $(".back").addClass("hoverEffect");
+            $(".reset").addClass("hoverEffect");
+        }
+    });
+    $(".card").click(card_clicked);
+    $(".reset").click(resetGame);
 };
