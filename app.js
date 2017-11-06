@@ -189,7 +189,7 @@ function initializeApp() {
                     } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero04.png') {
                         audio = new Audio('sounds/mage.ogg');
                         audio.play();
-                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero05.png') {
+                    } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero05_02.png') {
                         audio = new Audio('sounds/druid.ogg');
                         audio.play();
                     } else if ($(first_card_clicked).find(".front").find("img").attr("src") === 'images/hero06.png') {

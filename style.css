@@ -181,14 +181,6 @@ header {
     top: 0;
     left: 0;
 }
-
-/* front pane, placed above back */
-/*.front {*/
-    /*!* for firefox 31 *!*/
-    /*transform: rotateY(180deg);*/
-/*}*/
-
-/* back, initially hidden pane */
 .back {
     z-index: 2;
     transform: rotateY(0deg);
