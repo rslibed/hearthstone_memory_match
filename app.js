@@ -82,9 +82,9 @@ function initializeApp () {
         var animationOption = $("<div>").addClass("option");
         var animationTitle = $("<span>").text("Toggle animations:");
         var animation = $("<input>").addClass("animation").attr({
-            "type": "checkbox",
+            type: "checkbox",
             name: "animation",
-            "checked": "true"
+            checked: "true"
         });
         modalDiv.append(modalDialog);
         modalDialog.append(modalContent);
@@ -143,6 +143,7 @@ function initializeApp () {
             if (first_card_clicked === null) {
                 first_card_clicked = this;
                 $(first_card_clicked).find(".back").addClass("hidden");
+                $(first_card_clicked).find(".back").addClass("hidden;")
                 $(first_card_clicked).find(".front").attr("clicked", "true");
                 preventClick = true;
             } else {
