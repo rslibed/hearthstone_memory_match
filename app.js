@@ -190,6 +190,7 @@ function card_clicked() {
         allowClick = false;
         if (first_card_clicked === null) {
             first_card_clicked = this;
+            console.log(first_card_clicked);
             $(first_card_clicked).addClass("flip");
             $(first_card_clicked).find(".front").attr("clicked", "true");
             allowClick = true;

@@ -21,6 +21,10 @@ html {
     font-size: 2vmin;
 }
 /* General */
+.attempts-value,
+.games-value {
+    color: #FFB800;
+}
 .title, .label, .value {
     color: #FFB800;
 }
@@ -155,6 +159,10 @@ header {
 .back img {
     width: 100%;
     border-radius: 6%;
+}
+.front img,
+.back img {
+    user-select: none;
 }
 /* entire container, keeps perspective */
 .card-container {
