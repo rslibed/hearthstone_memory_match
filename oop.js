@@ -3,7 +3,7 @@ class MemoryMatch {
         this.firstCardClicked = null
         this.secondCardClicked = null
         this.totalPossibleMatches = 9
-        this.matchCounter = 0
+        this.matchCounter = 0;
         this.allowClick = true
         this.attempts = 0;
         this.gamesPlayed = 0;
@@ -85,11 +85,14 @@ class MemoryMatch {
                 const secondCardImgSrc = this.secondCardClicked.children[0].children[0].src
                 if (firstCardImgSrc === secondCardImgSrc) {
                     this.handleMatchedCards();
+                    if (this.matchCounter >= 9) {
+                        this.winCondition();
+                    }
                 } else {
                     this.hideMismatchedCards(this.firstCardClicked, this.secondCardClicked);
                 }
                 this.handleAttemptsStat();
-                this.handleAccuracyStat();
+                document.querySelector(".accuracy-value").innerText = this.handleAccuracyStat();
             }
         }
     }
@@ -142,12 +145,16 @@ class MemoryMatch {
             let accuracy = this.matchCounter / this.attempts;
             accuracy = accuracy * 100;
             accuracy = accuracy.toFixed(2);
-            document.querySelector(".accuracy-value").innerText = accuracy + "%";
+            return accuracy + "%";
         } else {
-            document.querySelector(".accuracy-value").innerText = "0.00%";
+            return "0.00%";
         }
     }
+    winCondition () {
+        document.querySelector(".reset").innerText = "Play again!";
+    }
     resetGame() {
+        document.querySelector(".reset").innerText = "Reset";
         this.attempts = 0;
         this.gamesPlayed = this.gamesPlayed + 1;
         document.querySelector(".games-value").innerText = this.gamesPlayed;
