@@ -12,36 +12,46 @@
     <title>Heroes of MatchCraft - Memory Match Game</title>
 </head>
 <body>
-    <header>
-        <span class="title"><img src="images/logo.jpg">Matchstone: Heroes of Matchcraft</span>
-        <div class="link-container">
-            <!-- <a href="#" data-toggle="modal" data-target="#settingsModal">Settings</a> -->
-            <a href="about.html" target="_blank">About</a>
-        </div>
-    </header>
-    <div id="stats-container">
-        <div id="stats">
-            <section class="game-info">
-                    <p>
-                        <span class="how">Objective: </span><br>Match 9 Heroes to win!
-                    </p>
-            </section>
-            <section class="games-played">
-                <div class="label">Games Played</div>
-                <div class="games-value">0</div>
-            </section>
-            <section class="attempts">
-                <div class="label">Attempts</div>
-                <div class="attempts-value">0</div>
-            </section>
-            <section class="accuracy">
-                <div class="label">Accuracy</div>
-                <div class="accuracy-value">0.00%</div>
-            </section>
-            <button class="reset hoverEffect">Reset Game</button>
-        </div>
+    <div class="landscape-mode">
+        <p>This game was meant to be played in landscape mode.</p>
     </div>
-    <div id="game-area">
+    <div class="game-container">
+        <header>
+            <img class="title-img" src="images/logo.jpg">
+            <div class="title-div">
+                <h1 class="title">Matchstone: Heroes of Matchcraft</h1>
+            </div>
+            <div class="link-container">
+                <!-- <a href="#" data-toggle="modal" data-target="#settingsModal">Settings</a> -->
+                <a href="about.html" target="_blank">About</a>
+            </div>
+        </header>
+        <div id="stats-container">
+            <div id="stats">
+                <div class="stats-text">
+                    <section class="game-info">
+                            <p>
+                                <span class="how">Objective: </span><br>Match 9 Heroes to win!
+                            </p>
+                    </section>
+                    <section class="games-played">
+                        <div class="label">Games Played</div>
+                        <div class="games-value">0</div>
+                    </section>
+                    <section class="attempts">
+                        <div class="label">Attempts</div>
+                        <div class="attempts-value">0</div>
+                    </section>
+                    <section class="accuracy">
+                        <div class="label">Accuracy</div>
+                        <div class="accuracy-value">0.00%</div>
+                    </section>
+                    <button class="reset hoverEffect">Reset Game</button>
+                </div>
+            </div>
+        </div>
+        <div id="game-area">
+        </div>
     </div>
     <script src="oop.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

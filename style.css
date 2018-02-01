@@ -8,7 +8,7 @@
 }
 body {
     background: url('images/main-background.png');
-    background-size: cover;
+    /* background-size: cover; */
     background-repeat: no-repeat;
     height: 100%;
 }
@@ -24,27 +24,41 @@ html {
 .title, .label, .value {
     color: #FFB800;
 }
+.title-div {
+    display: inline-block;
+}
+/* Landscape  */
+.landscape-mode {
+    display: none;
+    color: #fff;
+    font-size: 7vmin;
+    background-color: #222;
+    top: 43vh;
+    position: relative;
+    transform: translateY(-50%);
+    text-align: center;
+}
 /* Header */
 header {
     width: 100%;
     height: 10vh;
+    display: flex;
+    align-items: center;
 }
 .title {
     font-size: 3em;
-    -webkit-text-stroke: 2px #CE6529;
-    position: relative;
-    left: 2%;
+    -webkit-text-stroke: 1px #CE6529;
 }
-.title img {
-    width: 8%;
+.title-img {
+    width: 5%;
+    line-height: 10vh;
 }
 .link-container {
     position: absolute;
-    width: 35%;
-    top: 5%;
-    right: 2%;
     display: inline-block;
     text-align: right;
+    top: 5%;
+    right: 1%;
 }
 .link-container a {
     color: #FFB800;
@@ -70,7 +84,8 @@ header {
     float: left;
 }
 #stats {
-    background: url('images/stats-container.png');
+    /* background: url('images/stats-container.png'); */
+    background: rgba(20,20,20, 0.8);
     background-size: cover;
     height: 70%;
     border-radius: 3%;
@@ -78,16 +93,20 @@ header {
     top: 5%;
     left: 3%;
 }
-.games-played, .attempts, .accuracy, .game-info  {
+.stats-text  {
     position: relative;
     top: 8%;
-    left: 18%;
+    width: 80%;
+    margin: 0 auto;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 .reset {
-    position: absolute;
-    left: 10px;
-    top: 15vh;
-    font-size: 4vmin;
+    position: relative;
+    top: 5vh;
+    width: 60%;
+    height: 7vh;
+    font-size: 3vmin;
 }
 .play-reset {
     font-size: 3vmin;
@@ -123,6 +142,9 @@ header {
     width: 80%;
     height: 90vh;
     float: left;
+}
+#game-area, #stats-container {
+    height: 85vh;
 }
 .card-container {
     position: relative;
@@ -313,4 +335,80 @@ p {
     position: relative;
     left: 43%;
 }
-
+@media (max-width: 800px) and (orientation: portrait) {
+    body {
+        background-size: 160vh;
+        background-position-x: -59vw;
+    }
+    .landscape-mode {
+        display: block;
+    }
+    .game-container {
+        display: none;
+    }
+}
+@media (max-width: 1100px) {
+    html {
+        height: 90%;
+    }
+    body {
+        width: 93%;
+    }
+    #stats-container {
+        position: relative;
+        width: 90vw;
+        height: 18vh;
+        top: -12vh;
+    }
+    #stats {
+        left: 0;
+    }
+    .stats-text section, .reset {
+        display: inline-block;
+        width: 15%;
+    }
+    .title {
+        display: none;
+        top: 0vh;
+    }
+    .title-img {
+        display: none;
+    }
+    #game-area{
+        position: relative;
+        top: -17vh;
+        width: 100%;
+    }
+    .stats-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: auto;
+    }
+    .stats-text p, .stats-text div {
+        white-space: nowrap;
+    }
+    .stats-text section {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .link-container {
+        z-index: 1000;
+    }
+    .link-container a {
+        font-size: 1.6em;
+    }
+    .reset {
+        top: -1vh;
+    }
+    .hoverEffect:hover {
+        box-shadow: none;
+        cursor: pointer;
+    }
+}
+@media (max-width: 813px) {
+    .front img, .back img {
+        height: 25vh;
+        width: 90px;
+    }
+}
