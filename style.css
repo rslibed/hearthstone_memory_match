@@ -24,6 +24,17 @@ html {
 .title, .label, .value {
     color: #FFB800;
 }
+/* Landscape  */
+.landscape-mode {
+    display: none;
+    color: #fff;
+    font-size: 7vmin;
+    background-color: #222;
+    top: 43vh;
+    position: relative;
+    transform: translateY(-50%);
+    text-align: center;
+}
 /* Header */
 header {
     width: 100%;
@@ -34,8 +45,9 @@ header {
     -webkit-text-stroke: 2px #CE6529;
     position: relative;
     left: 2%;
+    top: -40%;
 }
-.title img {
+.title-img {
     width: 8%;
 }
 .link-container {
@@ -70,7 +82,8 @@ header {
     float: left;
 }
 #stats {
-    background: url('images/stats-container.png');
+    /* background: url('images/stats-container.png'); */
+    background: rgba(20,20,20, 0.8);
     background-size: cover;
     height: 70%;
     border-radius: 3%;
@@ -78,16 +91,17 @@ header {
     top: 5%;
     left: 3%;
 }
-.games-played, .attempts, .accuracy, .game-info  {
+.stats-text  {
     position: relative;
     top: 8%;
     left: 18%;
 }
 .reset {
-    position: absolute;
-    left: 10px;
-    top: 15vh;
-    font-size: 4vmin;
+    position: relative;
+    top: 5vh;
+    width: 60%;
+    height: 7vh;
+    font-size: 3vmin;
 }
 .play-reset {
     font-size: 3vmin;
@@ -123,6 +137,9 @@ header {
     width: 80%;
     height: 90vh;
     float: left;
+}
+#game-area, #stats-container {
+    height: 85vh;
 }
 .card-container {
     position: relative;
@@ -312,5 +329,62 @@ p {
 .modal-title {
     position: relative;
     left: 43%;
+}
+
+@media (max-width: 1100px) {
+    html {
+        height: 90%;
+    }
+    body {
+        width: 93%;
+    }
+    #stats-container {
+        position: relative;
+        width: 90%;
+        height: 19vh;
+        left: 7%;
+        top: -12vh;
+    }
+    .stats-text section, .reset {
+        display: inline-block;
+        width: 15%;
+    }
+    .title {
+        display: none;
+        top: 0vh;
+    }
+    #game-area{
+        position: relative;
+        top: -17vh;
+        width: 100%;
+    }
+    .stats-text {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5%;
+    }
+    .link-container {
+        z-index: 1000;
+    }
+    .reset {
+        top: -1vh;
+    }
+    .hoverEffect:hover {
+        box-shadow: none;
+        cursor: pointer;
+    }
+}
+@media (max-width: 800px) and (orientation: portrait) {
+    body {
+        background-size: 160vh;
+        background-position-x: -90vw;
+    }
+    .landscape-mode {
+        display: block;
+    }
+    .game-container {
+        display: none;
+    }
 }
 
