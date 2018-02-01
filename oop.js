@@ -8,30 +8,7 @@ class Game {
             allowClick: true,
             attempts: 0,
             accuracy: 0,
-            gamesPlayed: 0,
-            audio: '',
-            victory2: '',
-            victory3: '',
-            victory4: '',
-            backgroundMusicData: {
-                listOfBackgroundSongs: [
-                    'background-music',
-                    'background-music2',
-                    'background-music3',
-                    'background-music4'
-                ],
-                backgroundAudioPlaying: true,
-                loop: true,
-                randomSong: () => {
-                    Math.floor(Math.random() * this.listOfBackgroundSongs.length);
-                },
-                backgroundAudio: () => {
-                    new Audio('sounds/' + this.listOfBackgroundSongs[this.randomSong()] + '.ogg');
-                },
-                playAudio: () => {
-                    this.backgroundAudio.play();
-                }
-            }
+            gamesPlayed: 0
         }
         this.cardArray = [];
         this.createCardElements();
@@ -73,10 +50,10 @@ class Game {
         this.shuffle(this.cardArray);
     }
     shuffle(array) {
-        let remaining = array.length, temp, i;
+        let remaining = array.length;
         while (remaining) {
-            i = Math.floor(Math.random() * remaining--);
-            temp = array[remaining];
+            let i = Math.floor(Math.random() * remaining--);
+            let temp = array[remaining];
             array[remaining] = array[i];
             array[i] = temp;
         }
@@ -92,33 +69,41 @@ class Game {
             this.gameData.allowClick = false;
             if (this.gameData.firstCardClicked === null) {
                 this.gameData.allowClick = true;
-                this.gameData.firstCardClicked = card;
-                card.classList.add("flip");
-                const frontCardContainer = card.children[0];
-                frontCardContainer.classList.add("backface");
-                frontCardContainer.setAttribute("clicked", "true");
-                frontCardContainer.style.transform = "rotateY(180deg)";
+                this.userClickedFirstCard(card);
             } else {
-                this.gameData.secondCardClicked = card;
-                card.classList.add("flip");
-                const frontCardContainer = card.children[0];
-                frontCardContainer.style.transform = "rotateY(180deg)";
+                this.userClickedSecondCard(card);
                 if (this.gameData.firstCardClicked.children[0].children[0].src === this.gameData.secondCardClicked.children[0].children[0].src) {
-                    this.gameData.allowClick = false;
-                    setTimeout( () => {
-                        this.gameData.allowClick = true;
-                        this.gameData.matchCounter = this.gameData.matchCounter + 1;
-                        this.gameData.firstCardClicked = null;
-                        this.gameData.secondCardClicked = null;
-                    }, 1000)
+                    this.handleMatchedCards();
                 } else {
                     this.hideMismatchedCards(this.gameData.firstCardClicked, this.gameData.secondCardClicked);
                 }
-                this.gameData.attempts = this.gameData.attempts + 1;
-                console.log(this.gameData.attempts);
-                document.querySelector(".attempts-value").innerText = this.gameData.attempts;
+                this.handleAttemptsStat();
+                this.handleAccuracyStat();
             }
         }
+    }
+    userClickedFirstCard (card) {
+        this.gameData.firstCardClicked = card;
+        card.classList.add("flip");
+        const frontCardContainer = card.children[0];
+        frontCardContainer.classList.add("backface");
+        frontCardContainer.setAttribute("clicked", "true");
+        frontCardContainer.style.transform = "rotateY(180deg)";
+    }
+    userClickedSecondCard (card) {
+        this.gameData.secondCardClicked = card;
+        card.classList.add("flip");
+        const frontCardContainer = card.children[0];
+        frontCardContainer.style.transform = "rotateY(180deg)";
+    }
+    handleMatchedCards () {
+        this.gameData.allowClick = false;
+        this.gameData.matchCounter = this.gameData.matchCounter + 1;
+            setTimeout( () => {
+                this.gameData.allowClick = true;
+                this.gameData.firstCardClicked = null;
+                this.gameData.secondCardClicked = null;
+            }, 1000)
     }
     hideMismatchedCards (firstCard, secondCard) {
         setTimeout ( () => {
@@ -133,23 +118,28 @@ class Game {
             this.gameData.allowClick = true;
         }, 1000);
     }
+    handleAttemptsStat () {
+        this.gameData.attempts = this.gameData.attempts + 1;
+        document.querySelector(".attempts-value").innerText = this.gameData.attempts;
+    }
+    handleAccuracyStat () {
+        if (this.gameData.attempts > 0) {
+            this.gameData.accuracy = this.gameData.matchCounter / this.gameData.attempts;
+            this.gameData.accuracy = this.gameData.accuracy * 100;
+            this.gameData.accuracy = this.gameData.accuracy.toFixed(2);
+            document.querySelector(".accuracy-value").innerText = this.gameData.accuracy + "%";
+        }
+    }
     resetGame() {
         this.gameData.attempts = 0;
         this.gameData.accuracy = 0;
         this.gameData.gamesPlayed = this.gameData.gamesPlayed + 1;
         document.querySelector(".games-value").innerText = this.gameData.gamesPlayed;
+        document.querySelector(".attempts-value").innerText = this.gameData.attempts;
+        document.querySelector(".accuracy-value").innerText = this.gameData.accuracy;
         document.getElementById("game-area").innerText = "";
         this.cardArray = [];
         this.createCardElements();
-    }
-    settingsModal () {
-
-    }
-    winModal () {
-
-    }
-    toggleSound() {
-
     }
 }
 let initializeGame = new Game();

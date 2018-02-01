@@ -2,14 +2,9 @@
     font-family: 'LifeCraft';
     src: url('fonts/LifeCraft_Font.ttf');
 }
-
 * {
     box-sizing: border-box;
     font-family: 'LifeCraft';
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 body {
     background: url('images/main-background.png');
@@ -22,7 +17,8 @@ html {
 }
 /* General */
 .attempts-value,
-.games-value {
+.games-value,
+.accuracy-value {
     color: #FFB800;
 }
 .title, .label, .value {
@@ -56,6 +52,7 @@ header {
     font-size: 1.8em;
     letter-spacing: 2px;
     margin-right: 2%;
+    text-decoration: none;
 
 }
 .link-container a:hover {
@@ -168,6 +165,11 @@ header {
 .card-container {
     perspective: 1000px;
 }
+
+.front {
+    pointer-events: none;
+}
+
 /* flip the pane when hovered */
 .flip {
     transform: rotateY(180deg);
