@@ -1,15 +1,12 @@
-class Game {
+class MemoryMatch {
     constructor() {
-        this.gameData = {
-            firstCardClicked: null,
-            secondCardClicked: null,
-            totalPossibleMatches: 9,
-            matchCounter: 0,
-            allowClick: true,
-            attempts: 0,
-            accuracy: 0,
-            gamesPlayed: 0
-        }
+        this.firstCardClicked = null
+        this.secondCardClicked = null
+        this.totalPossibleMatches = 9
+        this.matchCounter = 0
+        this.allowClick = true
+        this.attempts = 0;
+        this.gamesPlayed = 0;
         this.cardArray = [];
         this.createCardElements();
         document.querySelector(".reset").addEventListener("click", () => {
@@ -19,31 +16,34 @@ class Game {
     createCardElements() {
         for (let i = 1; i < 10; i++) {
             for (let j = 0; j < 2; j++) {
-                let cardContainer = document.createElement("DIV");
-                let card = document.createElement("DIV");
-                let front = document.createElement("DIV");
-                let frontImage = document.createElement("IMG");
-                let back = document.createElement("DIV");
-                let backImage = document.createElement("IMG");
+                // Creating card elements on DOM
+                const cardContainer = document.createElement("DIV");
+                const card = document.createElement("DIV");
+                const front = document.createElement("DIV");
+                const frontImage = document.createElement("IMG");
+                const back = document.createElement("DIV");
+                const backImage = document.createElement("IMG");
+                // Adding class lists on card elements
                 cardContainer.classList.add("card-container");
                 card.classList.add("card");
-                cardContainer.appendChild(card);
                 front.classList.add("front");
+                back.classList.add("back", "hoverEffect", "backface");
+                backImage.classList.add("legend");
+                // Setting Attributes on card elements
                 frontImage.setAttribute("src", `images/hero0${i}.png`);
                 frontImage.setAttribute("draggable", 'false');
-                back.classList.add("back");
-                back.classList.add("hoverEffect");
-                back.classList.add("backface");
+                backImage.setAttribute("src", "images/card-back-legend.jpg");
+                backImage.setAttribute("draggable", 'false');
+                // Adding event listener to card back
                 back.addEventListener("click", () => {
                     this.cardClicked(front, back,frontImage.src, card);
                 })
-                backImage.classList.add("legend");
-                backImage.setAttribute("src", "images/card-back-legend.jpg");
-                backImage.setAttribute("draggable", 'false');
+                // Appending card elements
+                card.append(front, back);
                 front.appendChild(frontImage);
                 back.appendChild(backImage);
-                card.appendChild(front);
-                card.appendChild(back);
+                cardContainer.appendChild(card);
+                //  Pushing card containers to card array
                 this.cardArray.push(cardContainer);
             }
         }
@@ -52,30 +52,41 @@ class Game {
     shuffle(array) {
         let remaining = array.length;
         while (remaining) {
-            let i = Math.floor(Math.random() * remaining--);
-            let temp = array[remaining];
+            const i = Math.floor(Math.random() * remaining--);
+            const temp = array[remaining];
             array[remaining] = array[i];
             array[i] = temp;
         }
+        this.appendCardsToFragment(array);
+    }
+    appendCardsToFragment (array) {
+        const deckFragment = document.createDocumentFragment();
         for (let i = 0; i < array.length; i++) {
-            document.getElementById("game-area").appendChild(array[i]);
+            // document.getElementById("game-area").appendChild(array[i]);
+            deckFragment.appendChild(array[i])
         }
+        this.appendCardstoDOM(deckFragment);
+    }
+    appendCardstoDOM (deckFragment) {
+        document.getElementById("game-area").appendChild(deckFragment);
     }
     cardClicked (frontCardElement, backCardElement, frontImg, card) {
         if (frontCardElement.getAttribute("clicked")) {
             return;
         }
-        if (this.gameData.allowClick) {
-            this.gameData.allowClick = false;
-            if (this.gameData.firstCardClicked === null) {
-                this.gameData.allowClick = true;
+        if (this.allowClick) {
+            this.allowClick = false;
+            if (this.firstCardClicked === null) {
+                this.allowClick = true;
                 this.userClickedFirstCard(card);
             } else {
                 this.userClickedSecondCard(card);
-                if (this.gameData.firstCardClicked.children[0].children[0].src === this.gameData.secondCardClicked.children[0].children[0].src) {
+                const firstCardImgSrc = this.firstCardClicked.children[0].children[0].src
+                const secondCardImgSrc = this.secondCardClicked.children[0].children[0].src
+                if (firstCardImgSrc === secondCardImgSrc) {
                     this.handleMatchedCards();
                 } else {
-                    this.hideMismatchedCards(this.gameData.firstCardClicked, this.gameData.secondCardClicked);
+                    this.hideMismatchedCards(this.firstCardClicked, this.secondCardClicked);
                 }
                 this.handleAttemptsStat();
                 this.handleAccuracyStat();
@@ -83,7 +94,7 @@ class Game {
         }
     }
     userClickedFirstCard (card) {
-        this.gameData.firstCardClicked = card;
+        this.firstCardClicked = card;
         card.classList.add("flip");
         const frontCardContainer = card.children[0];
         frontCardContainer.classList.add("backface");
@@ -91,18 +102,22 @@ class Game {
         frontCardContainer.style.transform = "rotateY(180deg)";
     }
     userClickedSecondCard (card) {
-        this.gameData.secondCardClicked = card;
+        this.secondCardClicked = card;
         card.classList.add("flip");
         const frontCardContainer = card.children[0];
         frontCardContainer.style.transform = "rotateY(180deg)";
     }
     handleMatchedCards () {
-        this.gameData.allowClick = false;
-        this.gameData.matchCounter = this.gameData.matchCounter + 1;
+        this.allowClick = false;
+        this.matchCounter = this.matchCounter + 1;
             setTimeout( () => {
-                this.gameData.allowClick = true;
-                this.gameData.firstCardClicked = null;
-                this.gameData.secondCardClicked = null;
+                this.firstCardClicked.style.display = "none";
+                this.secondCardClicked.style.display = "none";
+            }, 750)
+            setTimeout( () => {
+                this.allowClick = true;
+                this.firstCardClicked = null;
+                this.secondCardClicked = null;
             }, 1000)
     }
     hideMismatchedCards (firstCard, secondCard) {
@@ -113,33 +128,34 @@ class Game {
             secondCardClicked.classList.remove("flip");
             firstCardClicked.children[0].removeAttribute("clicked");
             secondCardClicked.children[0].removeAttribute("clicked");
-            this.gameData.firstCardClicked = null;
-            this.gameData.secondCardClicked = null;
-            this.gameData.allowClick = true;
+            this.firstCardClicked = null;
+            this.secondCardClicked = null;
+            this.allowClick = true;
         }, 1000);
     }
     handleAttemptsStat () {
-        this.gameData.attempts = this.gameData.attempts + 1;
-        document.querySelector(".attempts-value").innerText = this.gameData.attempts;
+        this.attempts = this.attempts + 1;
+        document.querySelector(".attempts-value").innerText = this.attempts;
     }
     handleAccuracyStat () {
-        if (this.gameData.attempts > 0) {
-            this.gameData.accuracy = this.gameData.matchCounter / this.gameData.attempts;
-            this.gameData.accuracy = this.gameData.accuracy * 100;
-            this.gameData.accuracy = this.gameData.accuracy.toFixed(2);
-            document.querySelector(".accuracy-value").innerText = this.gameData.accuracy + "%";
+        if (this.attempts > 0) {
+            let accuracy = this.matchCounter / this.attempts;
+            accuracy = accuracy * 100;
+            accuracy = accuracy.toFixed(2);
+            document.querySelector(".accuracy-value").innerText = accuracy + "%";
+        } else {
+            document.querySelector(".accuracy-value").innerText = "0.00%";
         }
     }
     resetGame() {
-        this.gameData.attempts = 0;
-        this.gameData.accuracy = 0;
-        this.gameData.gamesPlayed = this.gameData.gamesPlayed + 1;
-        document.querySelector(".games-value").innerText = this.gameData.gamesPlayed;
-        document.querySelector(".attempts-value").innerText = this.gameData.attempts;
-        document.querySelector(".accuracy-value").innerText = this.gameData.accuracy;
+        this.attempts = 0;
+        this.gamesPlayed = this.gamesPlayed + 1;
+        document.querySelector(".games-value").innerText = this.gamesPlayed;
+        document.querySelector(".attempts-value").innerText = this.attempts;
+        document.querySelector(".accuracy-value").innerText = this.handleAccuracyStat();
         document.getElementById("game-area").innerText = "";
         this.cardArray = [];
         this.createCardElements();
     }
 }
-let initializeGame = new Game();
+new MemoryMatch();
