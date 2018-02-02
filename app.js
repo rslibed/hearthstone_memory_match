@@ -273,7 +273,7 @@ function card_clicked() {
         }
 
         if (attempts > 0) {
-            accuracy = (parseFloat(match_counter / attempts) * 100).toFixed(2) + "%";
+            accuracy = (parseFloat(match_counter / attempts) * 10).toFixed(2) + "%";
             $(".accuracy .value").text(accuracy);
             $(".win-accuracy-value").text(accuracy);
         }

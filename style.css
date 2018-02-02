@@ -101,6 +101,9 @@ header {
     padding-left: 3%;
     padding-right: 3%;
 }
+.stats-text section {
+    font-size: 1.5em;
+}
 .reset {
     position: relative;
     top: 5vh;
@@ -150,15 +153,16 @@ header {
     width: 16.6%;
     float: left;
     height: 33%;
+    text-align: center;
 }
 .card {
-    width: 60%;
+    width: 65%;
     height: 90%;
     position: relative;
-    margin: 0 auto;
     top: 8%;
     background: transparent;
     border: none;
+    display: inline-block;
 }
 .front, .back {
     position: absolute;
@@ -347,17 +351,12 @@ p {
     }
 }
 @media (max-width: 1100px) {
-    html {
-        height: 90%;
-    }
-    body {
-        width: 93%;
-    }
     #stats-container {
         position: relative;
         width: 90vw;
         height: 18vh;
         top: -12vh;
+        float: right;
     }
     #stats {
         left: 0;
@@ -371,7 +370,7 @@ p {
         top: 0vh;
     }
     .title-img {
-        display: none;
+        width: 8vw;
     }
     #game-area{
         position: relative;
@@ -399,15 +398,25 @@ p {
     }
     .reset {
         top: -1vh;
+        margin: 1% 0;
     }
     .hoverEffect:hover {
         box-shadow: none;
         cursor: pointer;
     }
+    .link-container {
+        display: none;
+    }
 }
-@media (max-width: 813px) {
-    .front img, .back img {
-        height: 25vh;
-        width: 90px;
+
+@media (max-width: 736px) {
+    #game-area {
+        height: 65vh;
+    }
+    .card {
+        width: 60%;
+    }
+    .card-container {
+        height: 42%;
     }
 }
