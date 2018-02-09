@@ -49,6 +49,20 @@ class MemoryMatch {
     }
     this.shuffle(this.cardArray);
   }
+  createWinModal() {
+    const winModal = document.createElement("DIV");
+    winModal.id = "win-modal";
+    const winModalTitle = document.createElement("H1");
+    winModalTitle.innerText = "Congratulations, you win!"
+    const winModalButton = document.createElement("BUTTON");
+    winModalButton.innerText = "Play Again!";
+    winModalButton.classList.add("reset", "hoverEffect");
+    winModalButton.addEventListener("click", () => {
+      this.resetGame();
+    })
+    winModal.append(winModalTitle, winModalButton);
+    document.getElementById("game-area").appendChild(winModal);
+  }
   shuffle(array) {
     let remaining = array.length;
     while (remaining) {
@@ -159,10 +173,12 @@ class MemoryMatch {
   }
   winCondition() {
     document.querySelector('.reset').innerText = 'Play again!';
+    this.createWinModal();
   }
   resetGame() {
     document.querySelector('.reset').innerText = 'Reset';
     this.attempts = 0;
+    this.matchCounter = 0;
     this.gamesPlayed = this.gamesPlayed + 1;
     document.querySelector('.games-value').innerText = this.gamesPlayed;
     document.querySelector('.attempts-value').innerText = this.attempts;

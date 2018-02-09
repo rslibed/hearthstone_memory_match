@@ -6,6 +6,10 @@
   box-sizing: border-box;
   font-family: 'LifeCraft';
 }
+body {
+  margin: 0; 
+  padding: 0;
+}
 html {
   background: url('images/main-background.png') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -99,7 +103,7 @@ header {
 .stats-text {
   position: relative;
   top: 8%;
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   padding-left: 3%;
   padding-right: 3%;
@@ -143,6 +147,7 @@ header {
 }
 /* Game Area */
 #game-area {
+  position: relative;
   width: 80%;
   height: 90vh;
   float: left;
@@ -159,7 +164,7 @@ header {
   text-align: center;
 }
 .card {
-  width: 65%;
+  width: 55%;
   height: 90%;
   position: relative;
   top: 8%;
@@ -261,6 +266,7 @@ header {
   border-radius: 3%;
 }
 .portfolio,
+h1,
 h3,
 p {
   color: #ffb800;
@@ -319,44 +325,40 @@ p {
   font-size: 20px;
 }
 /* Winner */
-.winner {
-  color: #ffb800;
-  -webkit-text-stroke: 4px #ce6529;
-  font-size: 15vmin;
-  text-align: center;
+#win-modal {
   position: absolute;
-  top: 32%;
-  left: 42%;
-}
-#winModal,
-.modal-content {
-  font-size: 3vmin;
+  width: 60%;
+  background-color: rgba(20,20,20,0.95);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 40%;
+  z-index: 2000;
   text-align: center;
-  color: #f8b700;
-  -webkit-text-stroke: 1px #ce6529;
+  padding: 2%;
 }
-.win-attempts,
-.win-accuracy {
-  width: 45%;
-  display: inline-block;
+#win-modal button {
+  top: 0;
 }
-.win-header {
-  text-align: center;
-}
-.win-content {
-  position: relative;
-  top: 20vh;
-}
-.modal-title {
-  position: relative;
-  left: 43%;
-}
-@media (max-width: 800px) {
+/* @media (max-width: 707px) {
   .card-container {
-    height: 22%;
+    height: 20%;
   }
   .card {
-    width: 45%;
+    width: 58%;
+  }
+} */
+
+
+@media (min-width: 0px) and (max-width: 581px) and (orientation: portrait) {
+  #game-area {
+    height: 65vh;
+  }
+  .card {
+    width: 50%;
+  }
+  .card-container {
+    height: 20%;
+    width: 32.6%;
   }
 }
 @media (min-width: 0px) and (max-width: 581px) {
@@ -364,15 +366,13 @@ p {
     height: 65vh;
   }
   .card {
-    width: 60%;
-    width: 43%;
+    width: 29%;
   }
   .card-container {
     height: 20%;
     width: 32.6%;
   }
 }
-
 @media (min-width: 582px) and (max-width: 781px) {
   .card-container {
     height: 35%;
@@ -391,6 +391,7 @@ p {
   }
   #stats {
     left: 0;
+    display: flex;
   }
   .stats-text section,
   .reset {
@@ -414,7 +415,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: auto;
+    width: 100%;
   }
   .stats-text p,
   .stats-text div {
@@ -442,6 +443,11 @@ p {
     display: none;
   }
 }
+@media (min-width: 1101px) {
+  .back {
+    width: 100%;
+  }
+}
 @media (min-width: 640px) and (max-width: 812px) and (orientation: landscape) {
   #game-area {
     height: 69vh;
@@ -451,5 +457,29 @@ p {
   }
   .card {
     width: 45%;
+  }
+}
+@media (min-width: 640px) and (max-width: 812px) {
+  .card {
+    width: 50%;
+  }
+}
+@media (max-width: 414px) and (orientation: portrait) {
+  .card {
+    width: 43%;
+  }
+  .card-container {
+    height: 18%;
+  }
+}
+
+@media (min-width: 2300px) {
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .front {
+    width: 100%;
   }
 }
