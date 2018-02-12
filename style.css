@@ -9,6 +9,7 @@
 body {
   margin: 0; 
   padding: 0;
+  height: 100vh;
 }
 html {
   background: url('images/main-background.png') no-repeat center center fixed;
@@ -35,17 +36,6 @@ html {
 .title-div {
   display: inline-block;
 }
-/* Landscape  */
-/* .landscape-mode {
-  display: none;
-  color: #fff;
-  font-size: 7vmin;
-  background-color: #222;
-  top: 43vh;
-  position: relative;
-  transform: translateY(-50%);
-  text-align: center;
-} */
 /* Header */
 header {
   width: 100%;
@@ -147,6 +137,7 @@ header {
 }
 /* Game Area */
 #game-area {
+  min-height: 420px;
   position: relative;
   width: 80%;
   height: 90vh;
@@ -231,57 +222,6 @@ header {
   z-index: 2;
   transform: rotateY(0deg);
 }
-/* About */
-#about-container {
-  text-align: center;
-  background-color: #222;
-  opacity: 0.99;
-  width: 80%;
-  position: relative;
-  top: 20vh;
-  height: 60vh;
-  border-radius: 5px;
-  margin: 0 auto;
-  padding: 20px;
-}
-#about {
-  width: 40%;
-  height: 100%;
-  float: left;
-  text-align: center;
-}
-#about-container h1 {
-  color: #ffb800;
-  -webkit-text-stroke: 1px #ce6529;
-  font-size: 3em;
-}
-#description-skills {
-  width: 60%;
-  height: 100%;
-  float: left;
-}
-#about img {
-  width: 65%;
-  position: relative;
-  border-radius: 3%;
-}
-.portfolio,
-h1,
-h3,
-p {
-  color: #ffb800;
-}
-.how {
-  -webkit-text-stroke: 1px #ce6529;
-}
-h3 {
-  text-align: left;
-  font-size: 1.8em;
-}
-p {
-  font-size: 1.3em;
-}
-
 /* Settings */
 .modal-dialog {
   opacity: 0.9;
@@ -339,16 +279,6 @@ p {
 #win-modal button {
   top: 0;
 }
-/* @media (max-width: 707px) {
-  .card-container {
-    height: 20%;
-  }
-  .card {
-    width: 58%;
-  }
-} */
-
-
 @media (min-width: 0px) and (max-width: 581px) and (orientation: portrait) {
   #game-area {
     height: 65vh;
@@ -443,14 +373,23 @@ p {
     display: none;
   }
 }
-@media (min-width: 1101px) {
-  .back {
-    width: 100%;
+@media (max-width: 414px) and (orientation: portrait) {
+  .card {
+    width: 43%;
+  }
+  .card-container {
+    height: 18%;
+  }
+}
+@media (min-width: 640px) and (orientation: portrait) {
+  #game-area {
+    top: -6vh;
   }
 }
 @media (min-width: 640px) and (max-width: 812px) and (orientation: landscape) {
   #game-area {
     height: 69vh;
+    min-height: auto;
   }
   .card-container {
     height: 40%;
@@ -464,15 +403,11 @@ p {
     width: 50%;
   }
 }
-@media (max-width: 414px) and (orientation: portrait) {
-  .card {
-    width: 43%;
-  }
-  .card-container {
-    height: 18%;
+@media (min-width: 1101px) {
+  .back {
+    width: 100%;
   }
 }
-
 @media (min-width: 2300px) {
   .card {
     position: absolute;
@@ -482,4 +417,54 @@ p {
   .front {
     width: 100%;
   }
+}
+/* About */
+#about-container {
+  text-align: center;
+  background-color: #222;
+  opacity: 0.99;
+  width: 80%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 20px;
+}
+#about {
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#about-container h1 {
+  color: #ffb800;
+  -webkit-text-stroke: 1px #ce6529;
+  font-size: 3em;
+  margin: 0;
+}
+.about-contents {
+  display: flex;
+}
+#about img {
+  width: 65%;
+  position: relative;
+  border-radius: 3%;
+}
+.portfolio,
+h1,
+h3,
+p {
+  color: #ffb800;
+}
+.how {
+  -webkit-text-stroke: 1px #ce6529;
+}
+h3 {
+  text-align: left;
+  font-size: 1.8em;
+}
+p {
+  font-size: 1.3em;
 }

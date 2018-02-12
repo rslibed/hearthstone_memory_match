@@ -95,6 +95,10 @@ class MemoryMatch {
         this.userClickedFirstCard(card);
       } else {
         this.userClickedSecondCard(card);
+        const cardBacks = document.getElementsByClassName('back');
+        for (let i = 0; i < cardBacks.length; i++) {
+          cardBacks[i].classList.remove('hoverEffect');
+        }
         const firstCardImgSrc = this.firstCardClicked.children[0].children[0]
           .src;
         const secondCardImgSrc = this.secondCardClicked.children[0].children[0]
@@ -146,6 +150,10 @@ class MemoryMatch {
   }
   hideMismatchedCards(firstCard, secondCard) {
     setTimeout(() => {
+      const cardBacks = document.getElementsByClassName('back');
+      for (let i = 0; i < cardBacks.length; i++) {
+        cardBacks[i].classList.add('hoverEffect');
+      }
       const firstCardClicked = firstCard;
       const secondCardClicked = secondCard;
       firstCardClicked.classList.remove('flip');
