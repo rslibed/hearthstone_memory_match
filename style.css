@@ -418,6 +418,11 @@ header {
     width: 100%;
   }
 }
+@media (max-height: 635px) {
+  .card {
+    width: 45%;
+  }
+}
 /* About */
 #about-container {
   text-align: center;
