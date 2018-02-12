@@ -18,6 +18,12 @@ html {
   background-size: cover;
   font-size: 2vmin;
 }
+.portfolio,
+h1,
+h3,
+p {
+  color: #ffb800;
+}
 /* General */
 .attempts-value,
 .games-value,

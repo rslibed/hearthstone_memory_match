@@ -146,14 +146,11 @@ class MemoryMatch {
       this.allowClick = true;
       this.firstCardClicked = null;
       this.secondCardClicked = null;
+      this.handleHoverEffect();
     }, 1000);
   }
   hideMismatchedCards(firstCard, secondCard) {
     setTimeout(() => {
-      const cardBacks = document.getElementsByClassName('back');
-      for (let i = 0; i < cardBacks.length; i++) {
-        cardBacks[i].classList.add('hoverEffect');
-      }
       const firstCardClicked = firstCard;
       const secondCardClicked = secondCard;
       firstCardClicked.classList.remove('flip');
@@ -163,7 +160,14 @@ class MemoryMatch {
       this.firstCardClicked = null;
       this.secondCardClicked = null;
       this.allowClick = true;
+      this.handleHoverEffect();
     }, 1000);
+  }
+  removeHoverEffect () {
+    const cardBacks = document.getElementsByClassName('back');
+    for (let i = 0; i < cardBacks.length; i++) {
+      cardBacks[i].classList.add('hoverEffect');
+    }
   }
   handleAttemptsStat() {
     this.attempts = this.attempts + 1;
@@ -180,11 +184,9 @@ class MemoryMatch {
     }
   }
   winCondition() {
-    document.querySelector('.reset').innerText = 'Play again!';
     this.createWinModal();
   }
   resetGame() {
-    document.querySelector('.reset').innerText = 'Reset';
     this.attempts = 0;
     this.matchCounter = 0;
     this.gamesPlayed = this.gamesPlayed + 1;
