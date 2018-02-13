@@ -50,18 +50,18 @@ class MemoryMatch {
     this.shuffle(this.cardArray);
   }
   createWinModal() {
-    const winModal = document.createElement("DIV");
-    winModal.id = "win-modal";
-    const winModalTitle = document.createElement("H1");
-    winModalTitle.innerText = "Congratulations, you win!"
-    const winModalButton = document.createElement("BUTTON");
-    winModalButton.innerText = "Play Again!";
-    winModalButton.classList.add("reset", "hoverEffect");
-    winModalButton.addEventListener("click", () => {
+    const winModal = document.createElement('DIV');
+    winModal.id = 'win-modal';
+    const winModalTitle = document.createElement('H1');
+    winModalTitle.innerText = 'Congratulations, you win!';
+    const winModalButton = document.createElement('BUTTON');
+    winModalButton.innerText = 'Play Again!';
+    winModalButton.classList.add('reset', 'hoverEffect');
+    winModalButton.addEventListener('click', () => {
       this.resetGame();
-    })
+    });
     winModal.append(winModalTitle, winModalButton);
-    document.getElementById("game-area").appendChild(winModal);
+    document.getElementById('game-area').appendChild(winModal);
   }
   shuffle(array) {
     let remaining = array.length;
@@ -146,7 +146,7 @@ class MemoryMatch {
       this.allowClick = true;
       this.firstCardClicked = null;
       this.secondCardClicked = null;
-      this.handleHoverEffect();
+      this.addHoverEffect();
     }, 1000);
   }
   hideMismatchedCards(firstCard, secondCard) {
@@ -160,10 +160,10 @@ class MemoryMatch {
       this.firstCardClicked = null;
       this.secondCardClicked = null;
       this.allowClick = true;
-      this.handleHoverEffect();
+      this.addHoverEffect();
     }, 1000);
   }
-  removeHoverEffect () {
+  addHoverEffect() {
     const cardBacks = document.getElementsByClassName('back');
     for (let i = 0; i < cardBacks.length; i++) {
       cardBacks[i].classList.add('hoverEffect');
