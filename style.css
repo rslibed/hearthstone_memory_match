@@ -7,7 +7,7 @@
   font-family: 'LifeCraft';
 }
 body {
-  margin: 0; 
+  margin: 0;
   padding: 0;
 }
 html {
@@ -48,6 +48,9 @@ header {
 .title {
   font-size: 3em;
   -webkit-text-stroke: 1px #ce6529;
+  -moz-text-stroke: 1px #ce6529;
+  -ms-text-stroke: 1px #ce6529;
+  -o-text-stroke: 1px #ce6529;
 }
 .title-img {
   width: 5%;
@@ -63,6 +66,9 @@ header {
 .link-container a {
   color: #ffb800;
   -webkit-text-stroke: 1px #ce6529;
+  -moz-text-stroke: 1px #ce6529;
+  -ms-text-stroke: 1px #ce6529;
+  -o-text-stroke: 1px #ce6529;
   font-size: 1.8em;
   letter-spacing: 2px;
   margin-right: 2%;
@@ -122,6 +128,9 @@ header {
   border-color: #ea3012;
   color: #f8b700;
   -webkit-text-stroke: 1px #ce6529;
+  -moz-text-stroke: 1px #ce6529;
+  -ms-text-stroke: 1px #ce6529;
+  -o-text-stroke: 1px #ce6529;
   transition: 0.8s;
 }
 .hoverEffect:hover {
@@ -132,6 +141,9 @@ header {
 .label {
   font-size: 1.5em;
   -webkit-text-stroke: 1px #ce6529;
+  -moz-text-stroke: 1px #ce6529;
+  -ms-text-stroke: 1px #ce6529;
+  -o-text-stroke: 1px #ce6529;
 }
 .game-info {
   color: #ffb800;
@@ -170,6 +182,10 @@ header {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .back {
@@ -191,11 +207,19 @@ header {
 }
 /* entire container, keeps perspective */
 .card-container {
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  -o-perspective: 1000px;
   perspective: 1000px;
 }
 
 .front {
   pointer-events: none;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
@@ -207,6 +231,10 @@ header {
 /* flip speed goes here */
 .card {
   transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
   position: relative;
 }
@@ -218,6 +246,10 @@ header {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .back {
@@ -270,7 +302,7 @@ header {
 #win-modal {
   position: absolute;
   width: 60%;
-  background-color: rgba(20,20,20,0.95);
+  background-color: rgba(20, 20, 20, 0.95);
   left: 50%;
   transform: translate(-50%, -50%);
   top: 40%;
