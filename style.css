@@ -417,7 +417,7 @@ header {
         height: 0vh;
       }
       #stats-container {
-        top: 1vh;
+        top: 0vh;
       }
       #game-area {
         top: -5vh;
