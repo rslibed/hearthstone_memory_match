@@ -256,48 +256,6 @@ header {
   z-index: 2;
   transform: rotateY(0deg);
 }
-/* Settings
-.modal-dialog {
-  opacity: 0.9;
-}
-.modal-header,
-.modal-body {
-  background-color: #222;
-}
-.modal-header,
-.modal-content {
-  border: none;
-}
-.modal-title {
-  font-size: 4vmin;
-}
-.modal-body span {
-  font-size: 3vmin;
-}
-.modal-title,
-.modal-body span {
-  color: #ffb800;
-  -webkit-text-stroke: 1px #ce6529;
-}
-.settings-content {
-  top: 20vh;
-}
-.sound {
-  position: relative;
-  left: 10px;
-  top: 2px;
-}
-.close span {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #fff;
-}
-.close span:hover {
-  cursor: pointer;
-}
-.fa {
-  color: #fff;
-  font-size: 20px;
-} */
 /* Winner */
 #win-modal {
   position: absolute;
@@ -450,5 +408,20 @@ header {
   }
   .front {
     width: 100%;
+  }
+}
+@media not all and (min-resolution: .001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    @media (max-width: 414px) and (orientation: portrait) {
+      header {
+        height: 0vh;
+      }
+      #stats-container {
+        top: 1vh;
+      }
+      #game-area {
+        top: -5vh;
+      }
+    }
   }
 }
