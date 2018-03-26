@@ -76,7 +76,6 @@ class MemoryMatch {
   appendCardsToFragment(array) {
     const deckFragment = document.createDocumentFragment();
     for (let i = 0; i < array.length; i++) {
-      // document.getElementById("game-area").appendChild(array[i]);
       deckFragment.appendChild(array[i]);
     }
     this.appendCardstoDOM(deckFragment);
@@ -170,7 +169,7 @@ class MemoryMatch {
     }
   }
   handleAttemptsStat() {
-    this.attempts = this.attempts + 1;
+    this.attempts += 1;
     document.querySelector('.attempts-value').innerText = this.attempts;
   }
   handleAccuracyStat() {
